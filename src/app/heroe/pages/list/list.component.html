@@ -1,0 +1,31 @@
+
+
+
+<h1 class="alingTexto">Heroes</h1>
+<mat-divider> </mat-divider>
+<br>
+
+ <mat-grid-list cols="1" rowHeight="200px" *ngIf="heroes.length === 0;  else divHeroe">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+
+</mat-grid-list>  
+<ng-template #divHeroe>
+
+
+<div fxLayout="row wrap"
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap= "20px">
+    <div fxFlex="20"
+         fxFlex.lg="20"
+         fxFlex.sm="30"
+         *ngFor="let heroe of heroes">
+    
+        <app-tarjeta-heroe [heroe]="heroe"></app-tarjeta-heroe> 
+    </div>
+
+</div>
+
+</ng-template>

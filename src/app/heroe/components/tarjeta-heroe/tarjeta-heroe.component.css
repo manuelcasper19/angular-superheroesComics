@@ -1,0 +1,41 @@
+img {
+   
+    height: 200px;
+    border-radius: 5px;
+}
+
+mat-card {
+    margin-top: 20px;
+    height: 500px;
+    justify-content: space-between;
+   
+   
+  }
+
+  /* .botones {   
+    position: relative;
+    float: left;
+  } */
+
+  /* .mat-card-content {
+    margin-right: 15px;
+    margin-left: 15px;
+  } */
+
+  .btn-cont {
+    position: absolute;
+    right: auto;
+    
+
+    bottom: 0;
+   
+  
+  }
+/* 
+  .btn-go {
+    float: right;
+    left: -10px;
+    position: relative;
+    top: -10px;
+    vertical-align: bottom;
+  } */

@@ -1,0 +1,137 @@
+<h1 class="alingTexto">Profile</h1>
+<mat-divider> </mat-divider>
+<br>
+
+
+<mat-grid-list cols="1" *ngIf="!user;  else divUser" rowHeight="200px">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+
+  <ng-template #divUser>
+
+    <!-- <div fxLayout="row wrap"
+         
+    fxLayoutAlign="center"
+         
+         
+          >  -->
+         <form  [formGroup]="formProfile"
+                autocomplete="off">
+           
+       <div fxLayout="row" 
+            fxLayoutAlign="center"  
+            fxLayoutGap="30px" 
+            class="contenedor" 
+            fxLayout.xs="column">      
+         <div fxFlex="50" fxLayout="column" >
+
+           
+              <mat-form-field appearance="fill">
+                  <mat-label>Id User</mat-label>
+                  <input required matInput 
+                         type="text"
+                         formControlName="uid"
+                         class="matInput">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input required matInput 
+                         type="email"                           
+                         formControlName="email"
+                         class="matInput">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                  <mat-label>Name</mat-label>
+                  <input required matInput 
+                         type="text"
+                         formControlName="name"
+                         class="matInput">
+                  <span  class="form-text text-danger"               
+                         *ngIf="validarCampos('name')"> 
+                         {{ getErrorMsg('name') }} </span>                           
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                  <mat-label>LastName</mat-label>
+                  <input required matInput 
+                         type="text"
+                         formControlName="lastname"
+                         class="matInput">
+                  <span  class="form-text text-danger"               
+                         *ngIf="validarCampos('lastname')"> 
+                         {{ getErrorMsg('lastname') }} </span>                            
+              </mat-form-field>  
+          
+              
+           
+
+          
+    
+       </div>
+
+       <div fxFlex="50" fxLayout="column">
+              <div class="cat">                 
+               <img class="img" [src]="user | imagen" *ngIf="!src">    
+               <img class="img" [src]="src" *ngIf="src">   
+            
+              </div>
+              
+              <div fxLayout="row" class="btn" >
+                
+                <div class="file-select" 
+                     *ngIf="btnEdit"
+                     >
+                  <input type="file" 
+                         name="photo"                      
+                         accept="image/png, image/jpeg, image/gif"
+                         [imageToDataUrl]="options"  
+                         (imageSelected)="selected($event)"
+                         
+                         
+                         #fileInput
+                         [disabled]="loading"
+                         >
+                </div>
+                
+       
+              </div>
+              
+           </div>
+
+       </div>
+       <div fxLayout="row" 
+       class="btn" 
+       fxLayoutGap="10px" >
+          <button mat-raised-button
+                  color="accent"
+                  (click)="edit()"
+                  *ngIf="!btnEdit">
+                  Edit
+          </button>
+          
+  
+          <button mat-raised-button
+                  color="primary"
+                  (click)="save()"
+                  *ngIf="btnEdit"
+                  [class.spinner]="loading" [disabled]="loading">
+                  {{ (loading) ? 'Actualizando...' : 'Guardar'}}  
+          </button>
+          
+  </div>
+        </form>
+    <!-- </div>  -->
+</ng-template>
+ 
+
+
+
+
+
+

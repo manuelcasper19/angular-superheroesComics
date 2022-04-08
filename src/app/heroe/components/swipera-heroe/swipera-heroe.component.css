@@ -1,0 +1,83 @@
+.contenedorImagen{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+
+
+  }
+
+  img{
+
+    width: 100%;
+    height: 440PX;
+    border-radius: 5px;
+    
+   
+  }
+
+
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    margin-left: 50px auto;
+    margin-right: 50px auto;
+    margin-top: 20px;
+  }
+  
+   /*
+  .swiper-slide {
+    
+    color: #000;
+    text-align: center;
+    height: 300px;
+    width: 100%;
+    border-radius: 5px;
+     line-height: 500px;  
+  }
+  */
+/*
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    /* Center slide text vertically
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+ ------------------- SECTION: LOGOS  ------------------- 
+
+.swiper-container {
+    width: 100%;
+    height: 100vh;
+}
+.swiper-container {
+    background: var(--cream);
+}
+
+.swiper-slide {
+    width: 100%;
+    height: 100vh;
+}
+.swiper-pagination-bullet-active {
+    background: #fff;
+}
+.swiper-container-vertical > .swiper-pagination-bullets {
+    right: 1.5rem;
+}
+*/

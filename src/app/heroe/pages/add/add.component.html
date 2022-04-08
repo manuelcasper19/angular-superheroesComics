@@ -1,0 +1,182 @@
+<!-- <mat-grid-list cols="1" rowHeight="200px" *ngIf="!heroe;  else divHeroe">
+       <mat-grid-tile>
+              <mat-spinner></mat-spinner>
+       </mat-grid-tile>
+
+</mat-grid-list> -->
+
+<!-- <ng-template #divHeroe> -->
+
+       <h1 class="alingTexto"> {{ (heroe) ? 'Editar Heroe' : 'Agregar Heroe' }}</h1>
+       <mat-divider></mat-divider>
+       <form [formGroup]="formHeroeAddEdit"
+              autocomplete="off">
+              <div fxLayout="row" 
+                   class="contenedor" 
+                   fxLayoutGap="20px" 
+                   fxLayout.xs="column">
+
+                     <div fxFlex="35" 
+                          fxLayout="column">
+
+                            <mat-form-field appearance="fill">
+                                   <mat-label>SuperHeroe</mat-label>
+                                   <input required matInput 
+                                          type="text" 
+                                          formControlName="superheroe" 
+                                          class="matInput">
+                                   <span  class="form-text text-danger" 
+                                          *ngIf="validarCampos('superheroe')">
+                                          {{ getErrorMsg('superheroe') }} </span>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                   <mat-label>Personaje</mat-label>
+                                   <input required matInput 
+                                          type="text" 
+                                          formControlName="personajes" 
+                                          class="matInput">
+                                   <span  class="form-text text-danger" 
+                                          *ngIf="validarCampos('personajes')">
+                                          {{ getErrorMsg('personajes') }} </span>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                   <mat-label>Año publicación</mat-label>
+                                   <input required matInput [matDatepicker]="picker" formControlName="aniocreacion"
+                                   class="matInput">
+                                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                   <mat-datepicker #picker></mat-datepicker>
+                                   <span  class="form-text text-danger" 
+                                          *ngIf="validarCampos('aniocreacion')">
+                                          
+                                   {{ getErrorMsg('aniocreacion') }}
+                            </span>
+                                 </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                   <mat-label>Comics</mat-label>
+                                   <mat-select  formControlName="comics" 
+                                                 required  
+                                                 class="matInput">
+                                          <mat-option *ngFor="let publica of publicaComiics" 
+                                                       [value]="publica.desc">
+                                                       {{ publica.desc }}
+                                          
+                                          </mat-option>
+                                      
+                                   </mat-select>
+                                   <span class="form-text text-danger" *ngIf="validarCampos('comics')">
+                                          {{ getErrorMsg('comics') }} </span>
+
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                   <mat-label>Peliculas</mat-label>
+                                   <input required matInput
+                                          type="text" 
+                                          formControlName="peliculas"
+                                          class="matInput">
+                                   <span  class="form-text text-danger" 
+                                          *ngIf="validarCampos('peliculas')">
+                                          {{ getErrorMsg('peliculas') }} </span>
+                            </mat-form-field>
+
+                     </div>
+                     <div fxFlex="65">
+                            <div fxLayout="row wrap" 
+                                 fxLayout.xs="column" 
+                                 fxLayoutAlign="center" 
+                                 fxLayoutGap="15px">
+                                   <div *ngIf="heroe" 
+                                        fxLayout="row wrap" 
+                                        fxLayout.xs="column" 
+                                        fxLayoutAlign="center" 
+                                        
+                                        >
+                                   <div *ngFor="let hero of heroe.fotos" 
+                                        fxLayout="column" 
+                                        fxFlex.lg="20" 
+                                        fxFlex.sm="30"
+                                        fxFlex.md="20" 
+                                        fxLayout.xs="column">
+
+                                          <img [src]="hero.secure_url" alt="">
+
+                                   </div>
+                                   </div>
+                                   <div fxLayout="column" 
+                                        fxFlex.lg="20" 
+                                        fxFlex.sm="30" 
+                                        fxFlex.md="20"
+                                        fxLayout.xs="column" 
+                                        *ngFor="let hero of arrayPhotos">
+
+                                          <img id="imagen" [src]="hero" *ngIf="arrayPhotos">
+                                   </div>
+
+                                          <div formArrayName="photos">
+                                           
+                                                 <div *ngFor="let item of arregloImg.controls; let i = index">
+                                                        
+
+                                                        <input type="file"  id="photos"  
+                                                               [imageToDataUrl]="options"  
+                                                               (imageSelected)="selected($event)"                                                          
+                                                               
+                                                               accept="image/png, image/jpeg, image/gif">
+                                                        <label for="photos" class="labelPhotos">
+                                                               <mat-icon class="icon">upload</mat-icon>
+
+
+                                                        </label>
+
+                                                 </div>
+                                          </div>
+                            
+                            </div>
+                     </div>
+
+
+              </div>
+              <div fxLayout="row" fxLayoutAlign="center">
+                     <button mat-raised-button 
+                             color="primary" 
+                             (click)="guardar()"
+                             *ngIf="btnActiveLoading"
+                             [class.spinner]="loading" 
+                             [disabled]="loading">
+                            <mat-icon>save</mat-icon>
+                            
+                            {{ (loading) ? 'Guardando...' : 'Guardar'}} 
+                            
+                     </button>
+
+                     <button (click)="addPhoto()" 
+                             *ngIf="btnActiveUpload"
+                              mat-raised-button
+                              color="accent"><mat-icon>photo</mat-icon>Fotos
+                     </button>
+
+                     <button mat-raised-button 
+                             color="warn" 
+                             (click)="borrar()" 
+                             *ngIf="heroe && btnActiveDeleting"
+                             [class.spinner]="deleting" 
+                             [disabled]="deleting">
+                         <mat-icon>delete_forever</mat-icon>
+                         
+                         {{ (deleting) ? 'Borrando...' : 'Borrar'}}
+                     </button>
+
+                     <button mat-raised-button                    
+                             (click)="resetear()"
+                             *ngIf="btnReset"
+                             >                     
+                     <mat-icon>lock_reset</mat-icon>
+                             No agregar fotos                     
+                     </button>
+                     
+              </div>
+   
+       </form>
+<!-- </ng-template> -->

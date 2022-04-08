@@ -1,0 +1,55 @@
+
+    <div fxLayout="row" fxLayoutAlign="center">
+        <h1>Buscador de Heroes</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div fxLayout="row wrap"  
+         fxLayoutAlign="center" 
+         fxLayoutGap="15px" 
+         fxLayout.xs="column"
+         >
+    <div fxFlex="50">
+       
+        <form [formGroup]="formSearch"
+              autocomplete="off">
+        <mat-form-field class="input" 
+                        appearance="fill">
+            <mat-label>Search Heroe</mat-label>
+            <input type="text"
+                   placeholder="Search Heroe"
+                   aria-label="Number"                   
+                   matInput
+                   formControlName="superheroe"
+                   [matAutocomplete]="auto"
+                   (input)="buscarHeroeSugerido()">
+            <mat-autocomplete autoActiveFirstOption 
+                              #auto="matAutocomplete"
+                              (optionSelected)="opcionSeleccionada( $event )">
+              <mat-option *ngFor="let heroe of heroes" 
+                          [value]="heroe">
+                {{heroe.superheroe }}
+              </mat-option>
+
+              <mat-option value="" 
+                          *ngIf="heroes.length === 0 && formSearch.get('superheroe')?.value">
+                  No se encontro nada con el nombre {{ formSearch.get('superheroe')?.value }}
+              </mat-option>
+
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        
+    </div>
+
+ 
+</div>
+<div  *ngIf="heroeSeleccionado" 
+      fxLayout="row" 
+      fxLayout.xs="column" 
+      fxLayoutAlign="center"       
+      fxLayout.md="column"
+      fxLayout.sm="column">
+    <div fxFlex="50">
+    <app-swipera-heroe [fotos]="heroeSeleccionado.fotos"></app-swipera-heroe>
+   </div>
+</div>

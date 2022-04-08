@@ -1,0 +1,22 @@
+<h1>¿Estás seguro? </h1>
+<hr>
+<p>Estás a punto de borrar a el heroe: <strong> {{ data.superheroe | uppercase }}</strong>
+    <br>
+    <br>
+    ¿Desea continuar?
+</p>
+
+<div class="btn">
+    <button mat-raised-button 
+            (click)="borrar()"
+            color="warn"
+            
+            >
+            <mat-icon>delete</mat-icon>
+            Sí, borrar!</button>
+
+    <button mat-button
+            (click)="cerrar()"
+           
+            >Cancelar!</button>
+</div>
